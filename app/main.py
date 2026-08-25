@@ -1,7 +1,17 @@
 from fastapi import FastAPI
 from routers.student_router import router as student_route
 from routers.college_route import router as college_route
-app = FastAPI()
+from routers.db_demonstration import router as db_demon_route
+from sqlmodel import SQLModel
+from contextlib import asynccontextmanager
+from database.engine import engine
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    SQLModel.metadata.create_all(engine)
+    yield
+
+app = FastAPI(lifespan=lifespan)
 
 # STUDENTS = [
 #     {"student_name":"Prasanna Kumar", "age":24, "branch":"electronics"},
@@ -15,3 +25,4 @@ app = FastAPI()
 
 app.include_router(student_route)
 app.include_router(college_route)
+app.include_router(db_demon_route)

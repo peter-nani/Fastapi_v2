@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from routers.student_router import router as student_route
+from routers.college_route import router as college_route
 app = FastAPI()
 
 # STUDENTS = [
@@ -13,3 +14,4 @@ app = FastAPI()
 #     return STUDENTS
 
 app.include_router(student_route)
+app.include_router(college_route)

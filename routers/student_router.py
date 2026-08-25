@@ -154,7 +154,7 @@ def patch_student(
 # DELETE - Delete a student
 # --------------------------------------------------
 
-@router.delete("/students/{student_id}")
+@router.delete("/students/{student_id}") #A path parameter is part of the URL path {student_id}.
 def delete_student(student_id: int):
 
     for index, student in enumerate(STUDENTS):
@@ -169,3 +169,23 @@ def delete_student(student_id: int):
         status_code=404,
         detail="Student not found"
     )
+
+
+
+#GET /student/students?branch=electronics
+#input: branch=electronics
+
+@router.get("/students_br")
+def get_students_br(branch: str | None = None):
+
+    if branch:
+        return [
+            student
+            for student in STUDENTS
+            if student["branch"] == branch
+        ]
+
+    return STUDENTS
+
+#GET /student/students_br
+#GET /student/students_br?branch=electronics

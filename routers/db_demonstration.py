@@ -5,7 +5,7 @@ from sqlmodel import Session
 
 router = APIRouter(
     prefix="/students_in",
-    tags=["/students_information"],
+    tags=["students_information"],
 )
 
 @router.post("/student_add", response_model=Student)

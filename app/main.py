@@ -6,6 +6,7 @@ from sqlmodel import SQLModel
 from contextlib import asynccontextmanager
 from database.engine import engine
 from routers.service_demonstration import router as service_demon
+from routers.dependency_demon import router as service_dep
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     SQLModel.metadata.create_all(engine)
@@ -27,3 +28,4 @@ app.include_router(student_route)
 app.include_router(college_route)
 app.include_router(db_demon_route)
 app.include_router(service_demon)
+app.include_router(service_dep)

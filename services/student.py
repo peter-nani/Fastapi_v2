@@ -1,6 +1,7 @@
 from models.student import Student
 from repositories.student import StudentRepository
 from schemas.student import StudentCreate
+from exceptions.student import StudentNotFoundException
 
 class StudentService:
 
@@ -9,6 +10,8 @@ class StudentService:
 
     def get_student(self, student_id:int)->Student:
         student = self.repository.get(student_id)
+        if student is None:
+            raise StudentNotFoundException(student_id)
         return student
 
     def create_student(self, student:StudentCreate)->Student:

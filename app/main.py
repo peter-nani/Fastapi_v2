@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 from database.engine import engine
 from routers.service_demonstration import router as service_route
 from routers.demonstrate_schemas import router as schema_route
+from exceptions.handler import register_exception_handlers
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,3 +31,5 @@ app.include_router(college_route)
 app.include_router(db_demon_route)
 app.include_router(service_route)
 app.include_router(schema_route)
+
+register_exception_handlers(app)

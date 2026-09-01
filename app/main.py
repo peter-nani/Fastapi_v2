@@ -8,6 +8,8 @@ from database.engine import engine
 from routers.service_demonstration import router as service_route
 from routers.demonstrate_schemas import router as schema_route
 from exceptions.handler import register_exception_handlers
+from middleware.logging import request_logging_middleware
+from middleware.request_id import request_id_middleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -33,3 +35,5 @@ app.include_router(service_route)
 app.include_router(schema_route)
 
 register_exception_handlers(app)
+app.middleware("http")(request_logging_middleware)
+app.middleware("http")(request_id_middleware)

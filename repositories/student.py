@@ -14,3 +14,11 @@ class StudentRepository:
 
     def get(self, student_id: int):
         return self.session.get(Student, student_id)
+
+    def get_all(self,offset:int=0, limit:int=10)->list[Student]:
+        statement = (
+            select(Student)
+            .offset(offset)
+            .limit(limit)
+            )
+        return self.session.exec(statement).all()

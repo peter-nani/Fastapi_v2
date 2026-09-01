@@ -21,3 +21,9 @@ class StudentService:
             course=student.course
         )
         return self.repository.create(db_student)
+
+    def get_students(self, offset:int=0, limit:int=10)->list[Student]:
+        return self.repository.get_all(
+            offset=offset,
+            limit=limit
+        )
